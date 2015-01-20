@@ -1,0 +1,21 @@
+Welcome to Emblem of Legends!
+This game is called a turn-based RPG; you take turns moving your characters and attacking your opponents. On each turn, your characters can each move once, and attack once. An attack can mean either a regular attack, or a spell.
+When you first click a character, its movement range will light up in blue. Clicking somewhere in it will open their red attacking range. Clicking someone in that range will attack them.
+As well, there are four buttons for a characters spells. When they're lit up(green), clicking one of them will open their green spell range (Unless it is self cast. If it is self cast, it will cast right away). Clicking a target in the range will cast the spell on them.
+When a character reaches 0 HP, they die and are removed from the game. You want to avoid this, unless the character in question is your enemy.
+
+There are five types of terrain, each with their own effect:
+    Blank (Gravel):
+        Low Defence, no effect.
+
+    Fort (Square Building):
+        High defence, increases range by 1
+
+    Plains (Grass):
+        Medium defence, heals by 50.
+
+    Swamp (Dark Green):
+        Medium defence, causes poison (50 damage per turn)
+
+    Mountain (Rock):
+        Cannot be moved through	

@@ -1,0 +1,109 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ServerService WSDL service -->
+
+  <service name="BrianSoap" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="urn:server"/>
+      <parameter name="wsdlServiceElement" value="ServerService"/>
+      <parameter name="schemaUnqualified" value="urn:server,http://beans.server"/>
+      <parameter name="wsdlServicePort" value="BrianSoap"/>
+      <parameter name="className" value="server.BrianSoapSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="Server"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="initializeSearch" qname="operNS:initializeSearch" xmlns:operNS="urn:server" soapAction="" >
+        <parameter qname="key" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+        <parameter qname="t" type="tns:Team" xmlns:tns="http://beans.server"/>
+      </operation>
+      <operation name="actionPossible" qname="operNS:actionPossible" xmlns:operNS="urn:server" returnQName="actionPossibleReturn" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="action" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+        <parameter qname="token" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <operation name="login" qname="operNS:login" xmlns:operNS="urn:server" returnQName="loginReturn" returnType="rtns:string" xmlns:rtns="http://schemas.xmlsoap.org/soap/encoding/" soapAction="" >
+        <parameter qname="name" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+        <parameter qname="password" type="tns:base64Binary" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <operation name="initBattle" qname="operNS:initBattle" xmlns:operNS="urn:server" returnQName="initBattleReturn" returnType="rtns:Team" xmlns:rtns="http://beans.server" soapAction="" >
+        <parameter qname="key" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <operation name="getTeam" qname="operNS:getTeam" xmlns:operNS="urn:server" returnQName="getTeamReturn" returnType="rtns:Team" xmlns:rtns="http://beans.server" soapAction="" >
+        <parameter qname="username" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <operation name="hasOpponent" qname="operNS:hasOpponent" xmlns:operNS="urn:server" returnQName="hasOpponentReturn" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="key" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <operation name="createAccount" qname="operNS:createAccount" xmlns:operNS="urn:server" returnQName="createAccountReturn" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="name" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+        <parameter qname="password" type="tns:base64Binary" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <operation name="sendTeam" qname="operNS:sendTeam" xmlns:operNS="urn:server" returnQName="sendTeamReturn" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="t" type="tns:Team" xmlns:tns="http://beans.server"/>
+        <parameter qname="key" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <operation name="hasNewMoves" qname="operNS:hasNewMoves" xmlns:operNS="urn:server" returnQName="hasNewMovesReturn" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="token" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <operation name="getNextAction" qname="operNS:getNextAction" xmlns:operNS="urn:server" returnQName="getNextActionReturn" returnType="rtns:string" xmlns:rtns="http://schemas.xmlsoap.org/soap/encoding/" soapAction="" >
+        <parameter qname="token" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <operation name="sendAction" qname="operNS:sendAction" xmlns:operNS="urn:server" returnQName="sendActionReturn" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="action" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+        <parameter qname="token" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <operation name="getMap" qname="operNS:getMap" xmlns:operNS="urn:server" returnQName="getMapReturn" returnType="rtns:MapB" xmlns:rtns="http://beans.server" soapAction="" >
+        <parameter qname="key" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <operation name="getProfile" qname="operNS:getProfile" xmlns:operNS="urn:server" returnQName="getProfileReturn" returnType="rtns:Profile" xmlns:rtns="http://beans.server" soapAction="" >
+        <parameter qname="username" type="tns:string" xmlns:tns="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </operation>
+      <parameter name="allowedMethods" value="initBattle createAccount initializeSearch getTeam getProfile hasOpponent login sendTeam getMap sendAction getNextAction hasNewMoves actionPossible"/>
+
+      <arrayMapping
+        xmlns:ns="urn:server"
+        qname="ns:ArrayOfArrayOf_soapenc_string"
+        type="java:java.lang.String[][]"
+        innerType="cmp-ns:string" xmlns:cmp-ns="http://schemas.xmlsoap.org/soap/encoding/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://beans.server"
+        qname="ns:Profile"
+        type="java:server.beans.Profile"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://beans.server"
+        qname="ns:MapB"
+        type="java:server.beans.MapB"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://beans.server"
+        qname="ns:Team"
+        type="java:server.beans.Team"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="urn:server"
+        qname="ns:ArrayOf_soapenc_string"
+        type="java:java.lang.String[]"
+        innerType="cmp-ns:string" xmlns:cmp-ns="http://schemas.xmlsoap.org/soap/encoding/"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>
